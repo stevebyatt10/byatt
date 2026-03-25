@@ -1,26 +1,206 @@
 @import "tailwindcss";
 
+/* ── Custom properties ─────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0d0d0d;
+  --bg-surface: #141414;
+  --border: #1c1c1c;
+  --text: #f0efeb;
+  --text-secondary: #555550;
+  --accent: #c1ff72;
+  --accent-dim: rgba(193, 255, 114, 0.1);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Base ──────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Hide default scrollbar — Lenis handles scroll */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Typography ────────────────────────────────────────────────────────── */
+.display {
+  font-size: clamp(5rem, 12vw, 14rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.heading {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.label {
+  font-family: var(--font-geist-mono, monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ── Text reveal split animation ───────────────────────────────────────── */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: inherit;
+}
+
+.word-inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ── Cursor ────────────────────────────────────────────────────────────── */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(240, 239, 235, 0.3);
+  transition: width 0.3s var(--ease-out-expo),
+    height 0.3s var(--ease-out-expo),
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.cursor-ring.hovered {
+  width: 60px;
+  height: 60px;
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ── Horizontal rule ───────────────────────────────────────────────────── */
+.hr-reveal {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  transform-origin: left;
+  will-change: transform;
+}
+
+/* ── Project image preview ─────────────────────────────────────────────── */
+.project-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 220px;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+  border-radius: 4px;
+  opacity: 0;
+  will-change: transform, opacity;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Nav ───────────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  mix-blend-mode: normal;
+}
+
+/* ── Section spacing ───────────────────────────────────────────────────── */
+.section {
+  padding: 8rem 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.25rem;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+
+  .nav {
+    padding: 1.25rem 1.25rem;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    gap: 1.25rem;
+  }
+
+  /* Showcase responsive */
+  .showcase-grid {
+    grid-template-columns: 24px 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .showcase-right-col {
+    display: none !important;
+  }
+
+
+  /* Hero */
+  .hero-scroll-indicator {
+    display: none;
+  }
+
+  .hero-meta {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    align-items: flex-start !important;
+  }
 }
