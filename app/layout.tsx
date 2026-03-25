@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Stephen Byatt - Software Engineer",
+  title: "Stephen Byatt - Senior Software Engineer",
   description:
-    "Software engineer based in London. Currently at Cleo, previously at Snap Inc.",
+    "Senior software engineer based in London. Currently at Cleo, previously at Snap Inc.",
   openGraph: {
-    title: "Stephen Byatt - Software Engineer",
+    title: "Stephen Byatt - Senior Software Engineer",
     description: "Software engineer based in London. Currently at Cleo, previously at Snap Inc.",
     type: "website",
   },

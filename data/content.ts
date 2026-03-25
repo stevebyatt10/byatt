@@ -1,6 +1,6 @@
 export const hero = {
   name: ["Stephen", "Byatt"],
-  role: "Software Engineer",
+  role: "Senior Software Engineer",
   location: "London, UK",
   tagline: "Building products people love at the intersection of engineering and craft.",
 }
@@ -63,7 +63,7 @@ export const experience = [
     location: "London, UK",
   },
   {
-    role: "Full Stack Engineer",
+    role: "Founder",
     company: "Trainrr",
     link: "https://trainrr.app",
     period: "Nov 2024 - Present",
@@ -84,7 +84,7 @@ export const experience = [
 ]
 
 export const about = {
-  bio: "I'm a software engineer currently at Cleo in London, shipping features for a high-scale consumer fintech app. Previously at Snap Inc. for 3+ years, leading cross-platform features across iOS, Android, and Web - most notably Screen Sharing for Snapchat Calls, now used by 1M+ users daily. I also built and launched Trainrr, a multi-tenant SaaS coaching platform, from zero.",
+  bio: "I'm a senior software engineer currently at Cleo in London, shipping features for a high-scale consumer fintech app. Previously at Snap Inc. for 3+ years, leading cross-platform features across iOS, Android, and Web - most notably Screen Sharing for Snapchat Calls, now used by 1M+ users daily. I also built and launched Trainrr, a multi-tenant SaaS coaching platform, from zero.",
   skills: [
     "TypeScript",
     "React",
