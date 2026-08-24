@@ -21,6 +21,20 @@ export default function Nav() {
     )
   }, [])
 
+  useEffect(() => {
+    const nav = navRef.current
+    if (!nav) return
+
+    const updateScrolled = () => {
+      nav.classList.toggle("nav-scrolled", window.scrollY > 32)
+    }
+
+    updateScrolled()
+    window.addEventListener("scroll", updateScrolled, { passive: true })
+
+    return () => window.removeEventListener("scroll", updateScrolled)
+  }, [])
+
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     const target = document.querySelector(href)

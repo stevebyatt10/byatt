@@ -154,6 +154,49 @@ body {
   mix-blend-mode: normal;
 }
 
+.nav::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: calc(100% + 6.5rem);
+  z-index: -1;
+  content: "";
+  background: linear-gradient(
+    180deg,
+    rgba(13, 13, 13, 0.82) 0%,
+    rgba(13, 13, 13, 0.82) 42%,
+    rgba(13, 13, 13, 0.48) 64%,
+    rgba(13, 13, 13, 0.16) 86%,
+    rgba(13, 13, 13, 0) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 46%,
+    rgba(0, 0, 0, 0.62) 68%,
+    rgba(0, 0, 0, 0.18) 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 46%,
+    rgba(0, 0, 0, 0.62) 68%,
+    rgba(0, 0, 0, 0.18) 88%,
+    transparent 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.nav-scrolled::before {
+  opacity: 1;
+}
+
 /* ── CV page ───────────────────────────────────────────────────────────── */
 .cv-page {
   min-height: 100vh;
@@ -293,25 +336,29 @@ body {
 }
 
 .pdf-scroll {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   padding: 2rem;
 }
 
 .pdf-page {
-  width: fit-content;
-  max-width: 100%;
+  width: max-content;
+  max-width: none;
+  margin: 0 auto;
   background: #f7f5ef;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
   line-height: 0;
 }
 
+.pdf-page + .pdf-page {
+  margin-top: 1.5rem;
+}
+
 .pdf-page canvas {
   display: block;
-  max-width: 100%;
-  height: auto;
+  max-width: none;
 }
 
 .pdf-message {
@@ -380,8 +427,11 @@ body {
   }
 
   .pdf-scroll {
-    gap: 1rem;
     padding: 1rem;
+  }
+
+  .pdf-page + .pdf-page {
+    margin-top: 1rem;
   }
 
   /* Showcase responsive */

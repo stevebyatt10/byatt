@@ -6,6 +6,16 @@ import { SplitText } from "@/components/SplitText"
 import { useTextReveal } from "@/hooks/useTextReveal"
 import { experience } from "@/data/content"
 
+function formatTimelinePeriod(period: string) {
+  const years = period.match(/\d{4}|Present/g)
+  if (!years?.length) return period
+
+  const start = years[0]
+  const end = years[years.length - 1]
+
+  return start === end ? start : `${start} — ${end}`
+}
+
 export default function Showcase() {
   const headingRef = useTextReveal<HTMLHeadingElement>({ stagger: 0.05 })
   const sectionRef = useRef<HTMLElement>(null)
@@ -32,35 +42,10 @@ export default function Showcase() {
     )
 
     const n = experience.length
-    const pinDistance = window.innerHeight * (n - 1)
+    const transitionDistance = window.innerHeight * (n - 1)
+    const finalHoldDistance = Math.min(window.innerHeight * 0.45, 420)
+    const pinDistance = transitionDistance + finalHoldDistance
     const ACCENT_DIM = "rgba(193, 255, 114, 0.3)"
-    const isMobile = window.innerWidth < 768
-
-    // ── Mobile: stack items vertically, no pin ───────────────────────────
-    if (isMobile) {
-      // Undo the CSS grid stacking — make items flow naturally
-      const container = itemsContainerRef.current!
-      container.style.display = "flex"
-      container.style.flexDirection = "column"
-      container.style.gap = "2.5rem"
-
-      items.forEach((item) => {
-        item.style.gridArea = "unset"
-        item.style.opacity = "0"
-        item.style.position = "relative"
-
-        gsap.fromTo(
-          item,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-            scrollTrigger: { trigger: item, start: "top 88%" } }
-        )
-      })
-
-      return () => {
-        ScrollTrigger.getAll().forEach((t) => t.kill())
-      }
-    }
 
     const updateDots = (activeIndex: number) => {
       dots.forEach((dot, i) => {
@@ -161,7 +146,7 @@ export default function Showcase() {
             scrollTrigger: {
               trigger: sectionRef.current,
               start: "top top",
-              end: `+=${pinDistance}`,
+              end: `+=${transitionDistance}`,
               scrub: true,
             },
           }
@@ -236,6 +221,7 @@ export default function Showcase() {
         >
           {/* Progress track */}
           <div
+            className="progress-rail"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -245,6 +231,7 @@ export default function Showcase() {
             }}
           >
             <div
+              className="progress-track"
               style={{
                 position: "absolute",
                 top: "8px",
@@ -483,7 +470,7 @@ export default function Showcase() {
                     className="label"
                     style={{ marginLeft: "auto", fontSize: "0.6rem", opacity: 0.6 }}
                   >
-                    {exp.period.split(" ")[0]}
+                    {formatTimelinePeriod(exp.period)}
                   </span>
                 </div>
               ))}
