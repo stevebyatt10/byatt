@@ -6,6 +6,7 @@ import { gsap } from "@/lib/gsap"
 const navLinks = [
   { label: "Experience", href: "#experience" },
   { label: "About", href: "#about" },
+  { label: "CV", href: "/cv" },
 ]
 
 export default function Nav() {
@@ -83,7 +84,11 @@ export default function Nav() {
             key={link.href}
             href={link.href}
             data-cursor-hover
-            onClick={(e) => scrollTo(e, link.href)}
+            onClick={
+              link.href.startsWith("#")
+                ? (e) => scrollTo(e, link.href)
+                : undefined
+            }
             style={{
               fontFamily: "var(--font-geist-mono)",
               fontSize: "0.65rem",

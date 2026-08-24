@@ -154,6 +154,178 @@ body {
   mix-blend-mode: normal;
 }
 
+/* ── CV page ───────────────────────────────────────────────────────────── */
+.cv-page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  padding: 4.75rem 0 0;
+}
+
+.cv-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.cv-logo {
+  height: 28px;
+  width: auto;
+}
+
+.cv-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cv-action-link,
+.cv-open-link {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: var(--font-geist-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  padding: 0.8rem 0.95rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.cv-action-link:hover,
+.cv-open-link:hover {
+  border-color: var(--text-secondary);
+  color: var(--accent);
+}
+
+.cv-action-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.cv-action-primary:hover {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.cv-shell {
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-viewer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+
+.pdf-toolbar {
+  position: sticky;
+  top: 4.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex: 0 0 auto;
+  height: 3.25rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-surface);
+  z-index: 10;
+}
+
+.pdf-status,
+.pdf-zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pdf-status {
+  color: var(--text-secondary);
+  font-family: var(--font-geist-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pdf-zoom-controls button {
+  display: inline-grid;
+  min-width: 2.25rem;
+  height: 2rem;
+  place-content: center;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-geist-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 0 0.65rem;
+  text-transform: uppercase;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.pdf-zoom-controls button:hover {
+  border-color: var(--text-secondary);
+  color: var(--accent);
+}
+
+.pdf-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.pdf-page {
+  width: fit-content;
+  max-width: 100%;
+  background: #f7f5ef;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  line-height: 0;
+}
+
+.pdf-page canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.pdf-message {
+  display: grid;
+  min-height: 100%;
+  place-content: center;
+  color: var(--text-secondary);
+  font-family: var(--font-geist-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 /* ── Section spacing ───────────────────────────────────────────────────── */
 .section {
   padding: 8rem 2.5rem;
@@ -182,6 +354,36 @@ body {
     gap: 1.25rem;
   }
 
+  .cv-page {
+    padding-top: 4.5rem;
+  }
+
+  .cv-header {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .cv-actions {
+    gap: 0.5rem;
+  }
+
+  .cv-action-link,
+  .cv-open-link {
+    padding: 0.7rem 0.75rem;
+  }
+
+  .pdf-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    height: auto;
+    min-height: 3.25rem;
+  }
+
+  .pdf-scroll {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
   /* Showcase responsive */
   .showcase-grid {
     grid-template-columns: 24px 1fr !important;
@@ -202,5 +404,9 @@ body {
     flex-direction: column !important;
     gap: 0.5rem !important;
     align-items: flex-start !important;
+  }
+
+  .hero-tagline {
+    margin-right: 0 !important;
   }
 }

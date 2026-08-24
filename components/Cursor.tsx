@@ -25,32 +25,25 @@ export default function Cursor() {
       yRing(e.clientY)
     }
 
-    const onEnter = () => ring.classList.add("hovered")
-    const onLeave = () => ring.classList.remove("hovered")
+    const isHoverable = (target: EventTarget | null) =>
+      target instanceof Element && target.closest("a, button, [data-cursor-hover]")
+
+    const onPointerOver = (e: PointerEvent) => {
+      if (isHoverable(e.target)) ring.classList.add("hovered")
+    }
+
+    const onPointerOut = (e: PointerEvent) => {
+      if (isHoverable(e.target)) ring.classList.remove("hovered")
+    }
 
     window.addEventListener("mousemove", onMove)
-
-    // Attach hover state to all interactive elements
-    const hoverables = document.querySelectorAll(
-      "a, button, [data-cursor-hover]"
-    )
-    hoverables.forEach((el) => {
-      el.addEventListener("mouseenter", onEnter)
-      el.addEventListener("mouseleave", onLeave)
-    })
-
-    // Use MutationObserver to catch dynamically added elements
-    const observer = new MutationObserver(() => {
-      document.querySelectorAll("a, button, [data-cursor-hover]").forEach((el) => {
-        el.addEventListener("mouseenter", onEnter)
-        el.addEventListener("mouseleave", onLeave)
-      })
-    })
-    observer.observe(document.body, { childList: true, subtree: true })
+    window.addEventListener("pointerover", onPointerOver)
+    window.addEventListener("pointerout", onPointerOut)
 
     return () => {
       window.removeEventListener("mousemove", onMove)
-      observer.disconnect()
+      window.removeEventListener("pointerover", onPointerOver)
+      window.removeEventListener("pointerout", onPointerOut)
     }
   }, [])
 

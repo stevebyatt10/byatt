@@ -136,11 +136,13 @@ export default function Hero() {
             <span className="label">— {hero.location}</span>
           </div>
           <p
+            className="hero-tagline"
             style={{
               fontSize: "clamp(0.85rem, 1.2vw, 1rem)",
               color: "var(--text-secondary)",
               maxWidth: "340px",
               lineHeight: 1.6,
+              marginRight: "clamp(5rem, 10vw, 8rem)",
             }}
           >
             {hero.tagline}
